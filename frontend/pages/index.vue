@@ -11,8 +11,11 @@ export default {
 
 <template lang="pug">
   .home
+    h1 Medicine Stock
     Card
-      h1 Fetch medicines
+      span filters
+    Card
+      span table
 </template>
 
 <style lang="stylus">
