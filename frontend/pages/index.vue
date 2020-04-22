@@ -1,11 +1,9 @@
 <script>
 import Card from '~/components/Card.vue'
-import Button from '~/components/Button.vue'
 
 export default {
   layout: 'default',
   components: {
-    Button,
     Card
   }
 }
@@ -14,8 +12,7 @@ export default {
 <template lang="pug">
   .home
     Card
-      h1 Fetch data
-      Button(text='Fetch')
+      h1 Fetch medicines
 </template>
 
 <style lang="stylus">
