@@ -8,7 +8,8 @@
     </Card>
     <Card>
       <span>
-        <table class="table">
+        <div v-if="error" class="alert alert-warning">{{ error }}</div>
+        <table v-else class="table">
           <thead>
             <tr>
               <th scope="col">Name</th>
@@ -49,9 +50,23 @@ export default {
     stock: []
   }),
   mounted() {
-    axios.get(API_URL).then((response) => {
-      this.stock = response.data.data.stock
-    })
+    this.getData()
+  },
+  methods: {
+    getData() {
+      axios
+        .get(API_URL)
+        .then((response) => {
+          if (response.data.status !== 200) {
+            this.error = response.data.message
+          }
+          this.error = ''
+          this.stock = response.data.data.stock
+        })
+        .catch((e) => {
+          this.error = 'There was a problem fetching the data, try refreshing.'
+        })
+    }
   }
 }
 </script>
