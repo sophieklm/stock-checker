@@ -8,9 +8,18 @@
     </Card>
     <Card>
       <span>
-        <div v-for="item in stock" :key="item.id" :item="item" class="column">
-          <StockList :item="item" />
-        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Type</th>
+              <th scope="col">Units Available</th>
+            </tr>
+          </thead>
+          <tbody v-for="(item, i) in stock" :key="i">
+            <StockList :item="item" />
+          </tbody>
+        </table>
       </span>
     </Card>
   </div>

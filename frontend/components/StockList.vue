@@ -1,26 +1,38 @@
 <script>
 export default {
   name: 'StockList',
-  props: ['item']
+  props: {
+    item: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    getClass(units) {
+      if (parseInt(units) === 0) {
+        this.class = 'bg-danger'
+        return this.class
+      }
+    },
+    styleUnitsAvailable(units) {
+      return parseInt(units) === 0 ? 'Out of Stock' : units
+    },
+    styleString(string) {
+      return string.replace(/_/g, ' ')
+    }
+  }
 }
 </script>
 
-<template>
-  <div class="item-card">
-    <div class="card">
-      <div class="card-content">
-        <h2>{{ item.name }}</h2>
-        <small>{{ item.type }}</small>
-        <span>{{ item.units_available }}</span>
-      </div>
-    </div>
-  </div>
-</template>
-
-<style scoped lang="stylus">
-.card
-  background-color: #FFFCFA
-  border-radius: 10px
-  box-shadow: 0 4px 8px #E2E2E2
-  padding: 28px 20px 20px 20px
+<style lang="stylus">
+.capitalise
+  text-transform: capitalize
 </style>
+
+<template>
+  <tr :class="getClass(`${item.units_available}`)">
+    <td class="capitalise">{{ styleString(item.name) }}</td>
+    <td class="capitalise">{{ styleString(item.type) }}</td>
+    <td>{{ styleUnitsAvailable(item.units_available) }}</td>
+  </tr>
+</template>
