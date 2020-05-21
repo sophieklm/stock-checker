@@ -1,16 +1,7 @@
 import * as express from "express";
 import api from "../api/api";
 
-interface Item {
-  id: string;
-  name: string;
-  type: string;
-  units_available: number;
-}
-
 export default class StockController {
-  private stock: Item[];
-
   public getStock = async (_req: null, res: express.Response) => {
     try {
       const response = await api.get("/stock");
@@ -29,7 +20,7 @@ export default class StockController {
       res.status(200).send(medicine);
     } catch (e) {
       // tslint:disable-next-line:no-console
-      console.log("Something went wrong::getResponseFromAPI", e);
+      console.log("Something went wrong: getStockByID", e);
       res.status(500).send(e.message);
     }
   };
