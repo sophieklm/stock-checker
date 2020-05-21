@@ -58,8 +58,9 @@ describe("when all is well", () => {
 
       const res = await request(server).get("/stock");
 
+      console.log(res);
       expect(res.status).toBe(200);
-      expect(res.body.data).toMatchObject(data);
+      expect(res.body).toMatchObject(data);
     });
   });
 
@@ -99,7 +100,6 @@ describe("when there is an error", () => {
 
       const res = await request(server).get("/stock");
       expect(res.status).toBe(500);
-      expect(res.body.data).toEqual({});
     });
   });
 
@@ -120,7 +120,6 @@ describe("when there is an error", () => {
 
       const res = await request(server).get("/stock/1");
       expect(res.status).toBe(500);
-      expect(res.body.data).toEqual({});
     });
   });
 });
