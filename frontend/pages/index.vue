@@ -1,23 +1,21 @@
 <template>
   <div class="home">
     <h1>Medicine Stock</h1>
-    <Card>
-      <span>
-        filters
-      </span>
-    </Card>
+    <Card />
     <Card>
       <span>
         <div v-if="error" class="alert alert-warning">{{ error }}</div>
         <table v-else class="table">
           <thead>
             <tr>
-              <th scope="col">Name</th>
+              <th scope="col">
+                <button class="ui button" @click="invertSort()">Name</button>
+              </th>
               <th scope="col">Type</th>
               <th scope="col">Units Available</th>
             </tr>
           </thead>
-          <tbody v-for="(item, i) in stock" :key="i">
+          <tbody v-for="(item, i) in sortedData" :key="i">
             <StockList :item="item" />
           </tbody>
         </table>
@@ -47,8 +45,16 @@ export default {
   },
   data: () => ({
     error: '',
-    stock: []
+    stock: [],
+    sortAsc: true
   }),
+  computed: {
+    sortedData() {
+      const result = this.stock
+      const ascDesc = this.sortAsc ? 1 : -1
+      return result.sort((a, b) => ascDesc * a.name.localeCompare(b.name))
+    }
+  },
   mounted() {
     this.getData()
   },
@@ -61,11 +67,14 @@ export default {
             this.error = response.data.message
           }
           this.error = ''
-          this.stock = response.data.data.stock
+          this.stock = response.data.stock
         })
         .catch((e) => {
           this.error = 'There was a problem fetching the data, try refreshing.'
         })
+    },
+    invertSort() {
+      this.sortAsc = !this.sortAsc
     }
   }
 }
