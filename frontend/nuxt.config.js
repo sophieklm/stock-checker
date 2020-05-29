@@ -76,5 +76,8 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  env: {
+    WS_URL: process.env.WS_URL || 'http://localhost:4000'
   }
 }

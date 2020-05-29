@@ -1,30 +1,25 @@
-import dotenv from "dotenv";
-import express from "express";
-import cors from "cors";
-import { controller } from "./controllers/StockController";
+import dotenv from 'dotenv';
+import { app, server } from './app';
+import express from 'express';
+import cors from 'cors';
+import { controller } from './controllers/StockController';
 
 dotenv.config();
-
-const app: express.Application = express();
 const router = express.Router();
 const port = process.env.PORT;
-app.use(
-  cors({
-    credentials: true,
-    origin: ["http://localhost:4000", "http://localhost:3000"],
-  })
-);
 
-app.use("/", router);
+app.use(cors({}));
 
-router.get("/stock", controller.getStock);
-router.get("/stock/:id", controller.getStockByID);
+app.use('/', router);
 
-if (process.env.NODE_ENV !== "test") {
-  app.listen(port, () =>
+router.get('/stock', controller.getStockCache);
+router.get('/stock/:id', controller.getStockByID);
+
+if (process.env.NODE_ENV !== 'test') {
+  server.listen(port, () =>
     // tslint:disable-next-line:no-console
     console.log(`Listening at http://localhost:${port}`)
   );
 }
 
-module.exports = app;
+module.exports = server;

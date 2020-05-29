@@ -52,6 +52,7 @@
 
 <script>
 import axios from 'axios'
+import socket from '~/plugins/socket.io.js'
 import Card from '~/components/Card.vue'
 import StockList from '~/components/StockList.vue'
 const API_URL = 'http://localhost:4000/stock/'
@@ -87,19 +88,22 @@ export default {
       return [...new Set(this.stock.map((item) => item.type))]
     }
   },
-  mounted() {
+  async created() {
+    // Get cached data.
     this.getData()
+
+    // Listen for new data.
+    await socket.emit('getStock')
+    await socket.on('gotStock', (stock) => {
+      this.stock = stock
+    })
   },
   methods: {
-    getData() {
-      axios
+    async getData() {
+      await axios
         .get(API_URL)
         .then((response) => {
-          if (response.data.status !== 200) {
-            this.error = response.data.message
-          }
-          this.error = ''
-          this.stock = response.data.stock
+          this.stock = response
         })
         .catch((e) => {
           this.error = 'There was a problem fetching the data, try refreshing.'
