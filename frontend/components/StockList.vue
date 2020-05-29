@@ -1,3 +1,11 @@
+<template>
+  <tr :class="getClass(`${item.units_available}`)">
+    <td class="capitalise">{{ styleString(item.name) }}</td>
+    <td class="capitalise">{{ styleString(item.type) }}</td>
+    <td>{{ styleUnitsAvailable(item.units_available) }}</td>
+  </tr>
+</template>
+
 <script>
 export default {
   name: 'StockList',
@@ -28,11 +36,3 @@ export default {
 .capitalise
   text-transform: capitalize
 </style>
-
-<template>
-  <tr :class="getClass(`${item.units_available}`)">
-    <td class="capitalise">{{ styleString(item.name) }}</td>
-    <td class="capitalise">{{ styleString(item.type) }}</td>
-    <td>{{ styleUnitsAvailable(item.units_available) }}</td>
-  </tr>
-</template>
