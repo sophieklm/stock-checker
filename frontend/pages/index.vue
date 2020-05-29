@@ -88,19 +88,19 @@ export default {
       return [...new Set(this.stock.map((item) => item.type))]
     }
   },
-  async created() {
+  mounted() {
     // Get cached data.
     this.getData()
 
     // Listen for new data.
-    await socket.emit('getStock')
-    await socket.on('gotStock', (stock) => {
+    socket.emit('getStock')
+    socket.on('gotStock', (stock) => {
       this.stock = stock
     })
   },
   methods: {
-    async getData() {
-      await axios
+    getData() {
+      axios
         .get(API_URL)
         .then((response) => {
           this.stock = response

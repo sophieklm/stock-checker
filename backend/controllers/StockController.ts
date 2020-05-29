@@ -9,7 +9,7 @@ export default class StockController {
     this.stockCache = new StockCache();
   }
 
-  public getStockCache = async () => {
+  public getStockCache = () => {
     return this.stockCache.stock;
   };
 
