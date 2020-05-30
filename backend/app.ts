@@ -11,5 +11,6 @@ io.on('connection', (socket) => {
   socket.on('getStock', async () => {
     const response = await controller.getStockFromAPI();
     socket.emit('gotStock', response.stock);
+    controller.saveStockCache(response.stock);
   });
 });

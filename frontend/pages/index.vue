@@ -55,7 +55,7 @@ import axios from 'axios'
 import socket from '~/plugins/socket.io.js'
 import Card from '~/components/Card.vue'
 import StockList from '~/components/StockList.vue'
-const API_URL = 'http://localhost:4000/stock/'
+const API_URL = process.env.API_URL
 
 export default {
   name: 'Home',
@@ -103,7 +103,11 @@ export default {
       axios
         .get(API_URL)
         .then((response) => {
-          this.stock = response
+          if (response.data.status !== 200) {
+            this.error = response.data.message
+          }
+          this.error = ''
+          this.stock = response.data
         })
         .catch((e) => {
           this.error = 'There was a problem fetching the data, try refreshing.'
