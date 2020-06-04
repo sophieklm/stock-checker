@@ -7,10 +7,14 @@ export const app: express.Application = express();
 export const server = http.createServer(app);
 const io = socketIO(server);
 
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
   socket.on("getStock", async () => {
-    const response = await controller.getStockFromAPI();
-    socket.emit("gotStock", response.stock);
-    controller.saveStockCache(response.stock);
+    try {
+      const response = await controller.getStockFromAPI();
+      socket.emit("gotStock", response.stock);
+      controller.saveStockCache(response.stock);
+    } catch (e) {
+      socket.emit("err", e.message);
+    }
   });
 });

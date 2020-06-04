@@ -31,12 +31,8 @@ export default class StockController {
   };
 
   public getStockFromAPI = async () => {
-    try {
-      const response = await api.get("/stock");
-      return response.data;
-    } catch (e) {
-      throw new Error(e.message);
-    }
+    const response = await api.get("/stock");
+    return response.data;
   };
 
   public getStockByID = async (req: express.Request, res: express.Response) => {

@@ -97,6 +97,9 @@ export default {
       this.error = ''
       this.stock = stock
     })
+    socket.on('err', (error) => {
+      this.error = error + `: Try refreshing.`
+    })
   },
   methods: {
     getData() {
@@ -110,7 +113,7 @@ export default {
           this.stock = response.data
         })
         .catch((e) => {
-          this.error = 'There was a problem fetching the data, try refreshing.'
+          this.error = `Unable to retrieve stock cache. ` + e.message
         })
     },
     invertSort() {
