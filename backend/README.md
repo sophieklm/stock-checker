@@ -13,11 +13,11 @@ Then:
 ```bash
 # install dependencies
 $ cp .env.example .env
-$ yarn install
+$ npm install
 
 # serve with reload-on-save at localhost:{port}
-$ yarn dev
+$ npm start
 
 # test
-$ yarn test
+$ npm test
 ```

@@ -14,9 +14,10 @@ Start services in both `/frontend` and `/backend`, instructions for both in thei
 
 #### To Do
 
+- Fix tests
 - Add sorting by Name, Type, Units Available
 - Make list items clickable, and open a modal. Modal contains Name, type, and units available, as well as a description.
 - Add pagination.
-- Monitor stock levels, send a notification when something goes out of stock. Post request to a webhook in Slack. The payload should be a simple json object which contains `{"text":"Panadol is out of stock"}` with dynamic name. Send the payload with header `Content-type: application/json`
+- Monitor stock levels: Send a notification when something goes out of stock. Post request to a webhook in Slack with a payload of `{"text":"Shoes out of stock"}`. Send the payload with header `Content-type: application/json`
 
 <img src="images/screenshot.png">
