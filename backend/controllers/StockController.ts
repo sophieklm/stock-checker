@@ -1,26 +1,41 @@
-import * as express from "express";
-import api from "../api/api";
+import * as express from 'express';
+import api from '../api/api';
+import client from '../redis';
 
 export default class StockController {
-  public getStock = async (_req: null, res: express.Response) => {
+  public getStockCache = async (
+    req: express.Request,
+    res: express.Response
+  ) => {
     try {
-      const response = await api.get("/stock");
-      return res.status(200).send(response.data);
+      const response = await client.getAsync('stockCache').then((result) => {
+        return result;
+      });
+      res.status(200).send(response);
     } catch (e) {
-      // tslint:disable-next-line:no-console
-      console.log("Something went wrong: getResponseFromAPI", e);
-      return res.status(500).send(e.message);
+      res.status(500).send(e.message);
+    }
+  };
+
+  public saveStockCache = (stock) => {
+    client.set('stockCache', JSON.stringify(stock));
+  };
+
+  public getStockFromAPI = async () => {
+    try {
+      const response = await api.get('/stock');
+      return response.data;
+    } catch (e) {
+      throw new Error(e.message);
     }
   };
 
   public getStockByID = async (req: express.Request, res: express.Response) => {
     try {
-      const response = await api.get("/stock");
+      const response = await api.get('/stock');
       const medicine = response.data.stock.find((x) => x.id === req.params.id);
       res.status(200).send(medicine);
     } catch (e) {
-      // tslint:disable-next-line:no-console
-      console.log("Something went wrong: getStockByID", e);
       res.status(500).send(e.message);
     }
   };

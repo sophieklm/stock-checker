@@ -4,7 +4,7 @@ dotenv.config();
 const token = process.env.API_KEY;
 
 const api = axios.create({
-  baseURL: "https://tech-challenge-mock-supplier.herokuapp.com",
+  baseURL: "https://mock-stock-sophieklm.herokuapp.com",
   headers: {
     Authorization: "Bearer " + token,
   },

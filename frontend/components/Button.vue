@@ -1,3 +1,8 @@
+<template lang="pug">
+  .button
+    button {{text}}
+</template>
+
 <script>
 export default {
   name: 'Button',
@@ -9,11 +14,6 @@ export default {
   }
 }
 </script>
-
-<template lang="pug">
-  .button
-    button {{text}}
-</template>
 
 <style scoped lang="stylus">
 .button

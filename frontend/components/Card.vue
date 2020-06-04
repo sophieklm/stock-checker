@@ -1,13 +1,13 @@
+<template lang="pug">
+  .card
+    slot
+</template>
+
 <script>
 export default {
   name: 'Card'
 }
 </script>
-
-<template lang="pug">
-  .card
-    slot
-</template>
 
 <style scoped lang="stylus">
 .card
