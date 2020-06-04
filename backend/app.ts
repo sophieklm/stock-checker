@@ -5,7 +5,9 @@ import { controller } from "./controllers/StockController";
 
 export const app: express.Application = express();
 export const server = http.createServer(app);
-const io = socketIO(server);
+const io = socketIO(server, {
+  pingTimeout: 60000,
+});
 
 io.on("connection", async (socket) => {
   socket.on("getStock", async () => {
