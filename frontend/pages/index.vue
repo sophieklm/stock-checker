@@ -93,6 +93,7 @@ export default {
     // Listen for new data.
     socket.emit('getStock')
     socket.on('gotStock', (stock) => {
+      this.error = ''
       this.stock = stock
     })
   },
