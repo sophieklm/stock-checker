@@ -61,8 +61,18 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    'nuxt-socket-io'
   ],
+  io: {
+    sockets: [
+      {
+        name: 'stock',
+        url: process.env.VUE_APP_WS_URL,
+        default: true
+      }
+    ]
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -78,6 +88,6 @@ export default {
     extend(config, ctx) {}
   },
   env: {
-    WS_URL: process.env.WS_URL || 'http://localhost:4000'
+    VUE_APP_WS_URL: process.env.VUE_APP_WS_URL || 'http://localhost:4000'
   }
 }
