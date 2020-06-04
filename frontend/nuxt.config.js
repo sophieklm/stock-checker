@@ -61,18 +61,8 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
-    'nuxt-socket-io'
+    '@nuxtjs/dotenv'
   ],
-  io: {
-    sockets: [
-      {
-        name: 'stock',
-        url: process.env.VUE_APP_WS_URL,
-        default: true
-      }
-    ]
-  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
