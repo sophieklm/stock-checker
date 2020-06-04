@@ -1,16 +1,24 @@
 import * as express from "express";
 import api from "../api/api";
-import client from "../redis";
+// import client from "../redis";
+import StockCache from "../models/stock";
 
 export default class StockController {
+  private stockCache: StockCache;
+
+  constructor() {
+    this.stockCache = new StockCache();
+  }
+
   public getStockCache = async (
     req: express.Request,
     res: express.Response
   ) => {
     try {
-      const response = await client.getAsync("stockCache").then((result) => {
-        return result;
-      });
+      // const response = await client.getAsync("stockCache").then((result) => {
+      //   return result;
+      // });
+      const response = this.stockCache.stock;
       res.status(200).send(response);
     } catch (e) {
       res.status(500).send(e.message);
@@ -18,7 +26,8 @@ export default class StockController {
   };
 
   public saveStockCache = (stock) => {
-    client.set("stockCache", JSON.stringify(stock));
+    this.stockCache.updateStock(stock);
+    // client.set("stockCache", JSON.stringify(stock));
   };
 
   public getStockFromAPI = async () => {
