@@ -53,7 +53,7 @@ import axios from 'axios'
 import socket from '~/plugins/socket.io.js'
 import Card from '~/components/Card.vue'
 import StockList from '~/components/StockList.vue'
-const API_URL = process.env.API_URL
+const API_URL = process.env.VUE_APP_API_URL
 
 export default {
   name: 'Home',
