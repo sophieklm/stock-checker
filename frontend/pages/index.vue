@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-    <h1>Medicine Stock</h1>
+    <h1 class="text-center">Stock Checker</h1>
     <Card>
-      <div class="btn-group" role="group">
+      <h4>Filter:</h4>
+      <div class="btn-group input-group" role="group">
         <div v-for="(filter, i) in getFilters" :key="i">
           <button
             type="button"
@@ -44,10 +45,7 @@
 <style lang="stylus">
 .home
   width: 100%
-  padding: 200px 0
-
-.filters
-  display: inline;
+  padding: 20px 0
 </style>
 
 <script>
