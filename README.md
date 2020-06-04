@@ -1,6 +1,7 @@
 # Stock Checker
 
-Stock checker using websockets and redis for caching.
+git remote add origin git@github.com:sophieklm/stock-checker.git
+git push -u origin master
 
 Uses a mock stock data api which simulates a delayed and unreliable response.
 
@@ -10,7 +11,7 @@ Uses a mock stock data api which simulates a delayed and unreliable response.
 
 Start services in both `frontend` and `backend`, instructions for both in their README.md files.
 
-#### TO DO:
+#### TO DO
 
 - Add sorting by Name, Type, Units Available
 - Make list items clickable, and open a modal. Modal contains Name, type, and units available, as well as a description.
