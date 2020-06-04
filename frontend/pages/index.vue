@@ -91,6 +91,7 @@ export default {
     this.getData()
 
     // Listen for new data.
+    this.error = 'Loading...'
     socket.emit('getStock')
     socket.on('gotStock', (stock) => {
       this.error = ''
