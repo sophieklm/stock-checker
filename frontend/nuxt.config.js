@@ -67,7 +67,7 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: { baseURL: process.env.API_URL || 'http://localhost:4000' },
   /*
    ** Build configuration
    */
@@ -78,6 +78,6 @@ export default {
     extend(config, ctx) {}
   },
   env: {
-    VUE_APP_WS_URL: process.env.VUE_APP_WS_URL || 'http://localhost:4000'
+    API_URL: process.env.API_URL || 'http://localhost:4000'
   }
 }

@@ -49,11 +49,10 @@
 </style>
 
 <script>
-import axios from 'axios'
 import socket from '~/plugins/socket.io.js'
 import Card from '~/components/Card.vue'
 import StockList from '~/components/StockList.vue'
-const API_URL = process.env.VUE_APP_API_URL
+// const API_URL = `${process.env.API_URL}/stock`
 
 export default {
   name: 'Home',
@@ -103,8 +102,8 @@ export default {
   },
   methods: {
     getData() {
-      axios
-        .get(API_URL)
+      this.$axios
+        .get('/stock')
         .then((response) => {
           if (response.data.status !== 200) {
             this.error = response.data.message
